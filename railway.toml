@@ -1,0 +1,10 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "python start_all.py"
+restartPolicyType = "always"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  nse-scraper:
+    build: .
+    container_name: nse-scraper
+    ports:
+      - "5000:5000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./event_calendar_data:/app/event_calendar_data
+      - ./announcements_data:/app/announcements_data
+      - ./crd_data:/app/crd_data
+      - ./credit_rating_data:/app/credit_rating_data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
